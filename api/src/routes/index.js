@@ -2,9 +2,10 @@ const { Router } = require("express");
 
 const {
   getAllCountriesAPI,
-  createCountries,
   findCountriesMatches,
   getCountries,
+  countryId,
+  createActivity,
 } = require("../controllers/controllers");
 
 // Importar todos los routers;
@@ -17,20 +18,16 @@ const router = Router();
 getAllCountriesAPI();
 
 router.get("/countries", async (req, res) => {
+  const { name } = req.query;
   try {
+    if (name) return res.status(200).json(await findCountriesMatches(name));
     res.status(200).json(await getCountries());
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
 });
 
-/* router.get("/countries/{idPais}:", async (req, res) => {
-  const { id } = req.params;
-  try {
-  } catch (error) {}
-}); */
-
-/* router.get("/countries", async (req, res) => {
+router.get("/countries", async (req, res) => {
   const { name } = req.query;
   try {
     const allMatches = findCountriesMatches(name);
@@ -38,7 +35,30 @@ router.get("/countries", async (req, res) => {
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
-}); */
+});
+
+router.post("/activities", async (req, res) => {
+  const { name, dificulty, duration, season } = req.body;
+  try {
+    const newActivity = await createActivity(name, dificulty, duration, season);
+    res.status(200).json({
+      state: "Activity created",
+      activity: newActivity,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// se hace mas adelante
+router.get("/countries/{idPais}:", async (req, res) => {
+  const { id } = req.params;
+  try {
+    res.status(200).json(countryId(id));
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
 
 module.exports = router;
 

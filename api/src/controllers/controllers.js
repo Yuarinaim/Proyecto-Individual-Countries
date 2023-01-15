@@ -1,28 +1,12 @@
 const axios = require("axios");
+const { Op } = require("sequelize");
 const { Country } = require("../db");
+const { Activities } = require("../db");
 
-const createCountries = ({
-  id,
-  name,
-  image,
-  continent,
-  capital,
-  subregion,
-  area,
-  poblation,
-}) => {
-  console.log(id, name, image, continent, capital);
+// prettier-ignore
+const createCountries = ({id, name, image, continent, capital, subregion, area, poblation}) => {
   if (id && name && image && continent && capital)
-    return Country.create({
-      id,
-      name,
-      image,
-      continent,
-      capital,
-      subregion,
-      area,
-      poblation,
-    });
+    return Country.create({ id, name, image, continent, capital, subregion, area, poblation });
 };
 
 const getAllCountriesAPI = async () => {
@@ -48,15 +32,28 @@ const getCountries = async () => {
 };
 
 const findCountriesMatches = async (name) => {
-  const allmatches = await Country.findAll({ where: { name: name } });
-  return allmatches;
+  const allmatches = await Country.findAll({
+    where: { name: { [Op.iLike]: `%${name}%` } },
+  });
+  if (allmatches.length) return allmatches;
+  throw Error("No se encontraron coincidencias");
+};
+
+// se hace mas adelante
+const countryId = async (id) => {
+  const findId = await Country.findByPk(id);
+};
+
+const createActivity = async (name, dificulty, duration, season) => {
+  return Activities.create({ name, dificulty, duration, season });
 };
 
 module.exports = {
   getAllCountriesAPI,
-  createCountries,
   findCountriesMatches,
   getCountries,
+  countryId,
+  createActivity,
 };
 /* 
 GET https://restcountries.com/v3/all

@@ -5,15 +5,17 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("activities", {
     id: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     dificulty: {
       type: DataTypes.ENUM("1", "2", "3", "4", "5"),
+      allowNull: false,
     },
     duration: {
       type: DataTypes.STRING,
