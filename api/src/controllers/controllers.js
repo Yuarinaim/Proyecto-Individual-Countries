@@ -41,7 +41,10 @@ const findCountriesMatches = async (name) => {
 
 // se hace mas adelante
 const countryId = async (id) => {
-  const findId = await Country.findByPk(id);
+  const findId = await Country.findOne({
+    where: { id: id },
+  });
+  return findId;
 };
 
 const createActivity = async (name, dificulty, duration, season) => {

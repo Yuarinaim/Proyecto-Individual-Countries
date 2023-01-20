@@ -50,11 +50,10 @@ router.post("/activities", async (req, res) => {
   }
 });
 
-// se hace mas adelante
-router.get("/countries/{idPais}:", async (req, res) => {
+router.get("/countries/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    res.status(200).json(countryId(id));
+    res.status(200).json(await countryId(id));
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
