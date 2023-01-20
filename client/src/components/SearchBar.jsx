@@ -1,27 +1,31 @@
 import { useState } from "react";
+import { searchCountry } from "../Redux/actions";
 import { useDispatch } from "react-redux";
-import { searchCountry } from "../redux/actions";
+/* import { useParams } from 'react-router-dom' */
+/* import styled from "styled-components"; */
 
-import styled from "styled-components";
 
+export default function SearchBar() {
+   
+   const [state, setState] = useState('')
 
-export default function SearchBar(props) {
-    
    const dispatch = useDispatch()
+   dispatch(searchCountry())
 
    function handleChange(e) {
       setState(e.target.value);
    };
 
    return (
-      <Barra>
+      <div>
          <input 
             type='search'
             onChange={handleChange}
             value={state}
+            placeholder="Pais"
          />
-         <button onClick={() => onSearch(state)}>buscar</button>
-      </Barra>
+         <button onClick={() => searchCountry(state)}>Buscar</button>
+      </div>
    );
 }
 

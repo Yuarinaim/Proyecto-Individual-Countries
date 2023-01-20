@@ -40,7 +40,8 @@ router.get("/countries", async (req, res) => {
 router.post("/activities", async (req, res) => {
   const { name, dificulty, duration, season } = req.body;
   try {
-    const newActivity = await createActivity(name, dificulty, duration, season);
+    // prettier-ignore
+    const newActivity = await createActivity({name, dificulty, duration, season});
     res.status(200).json({
       state: "Activity created",
       activity: newActivity,

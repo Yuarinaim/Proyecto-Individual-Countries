@@ -9,6 +9,7 @@ import {
 // ESTADO
 const initialState = {
   country: [],
+  filtCountry: [],
   countryDetail: [],
 };
 //
@@ -18,7 +19,9 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_COUNTRY:
       return {
         ...state,
-        country: state.country.filter((e) => e.name === action.payload),
+        filtCountry: [
+          ...state.country.filter((e) => e.name.includes(action.payload)),
+        ],
       };
 
     case GET_COUNTRY_DETAIL:

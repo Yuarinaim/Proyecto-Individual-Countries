@@ -39,7 +39,6 @@ const findCountriesMatches = async (name) => {
   throw Error("No se encontraron coincidencias");
 };
 
-// se hace mas adelante
 const countryId = async (id) => {
   const findId = await Country.findOne({
     where: { id: id },
@@ -47,7 +46,7 @@ const countryId = async (id) => {
   return findId;
 };
 
-const createActivity = async (name, dificulty, duration, season) => {
+const createActivity = async ({ name, dificulty, duration, season }) => {
   return Activities.create({ name, dificulty, duration, season });
 };
 
