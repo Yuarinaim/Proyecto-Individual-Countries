@@ -27,7 +27,18 @@ const getAllCountriesAPI = async () => {
 };
 
 const getCountries = async () => {
-  const listCountries = await Country.findAll();
+  const listCountries = await Country.findAll({
+    attributes: ["id", "name", "continent", "image"],
+    include: [
+      {
+        model: Activities,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
   return listCountries;
 };
 
