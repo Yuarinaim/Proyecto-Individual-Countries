@@ -1,27 +1,38 @@
 import {
+  CREATE_ACTIVITY,
   SEARCH_COUNTRY,
   GET_ALL_COUNTRY,
   GET_COUNTRY_DETAIL,
-  CREATE_ACTIVITY,
-  FILTER,
+  FILTER_CONTINENT,
+  FILTER_ACT,
+  ORDER_ALPH,
+  ORDER_POBLATION,
 } from "./actions";
 
 // ESTADO
 const initialState = {
-  country: [],
-  filtCountry: [],
+  backUp: [],
+  allCountry: [],
   countryDetail: [],
+  sortCountry: [],
 };
 //
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_COUNTRY:
+    case GET_ALL_COUNTRY:
       return {
         ...state,
-        filtCountry: [
-          ...state.country.filter((e) => e.name.includes(action.payload)),
-        ],
+        backUp: action.payload,
+        allCountry: action.payload,
+      };
+
+    case SEARCH_COUNTRY:
+      console.log("payload", action.payload);
+      return {
+        ...state,
+        backUp: action.payload,
+        allCountry: action.payload,
       };
 
     case GET_COUNTRY_DETAIL:
@@ -30,22 +41,54 @@ const rootReducer = (state = initialState, action) => {
         countryDetail: action.payload,
       };
 
-    case GET_ALL_COUNTRY:
-      return {
-        ...state,
-        country: action.payload,
-      };
-
     case CREATE_ACTIVITY:
       return {
         ...state,
-        country: [...state.country, action.payload],
+        backUp: [...state.backUp, action.payload],
       };
-
-    case FILTER:
+    ///////////////////////////////////
+    case FILTER_CONTINENT:
       return {
         ...state,
-        country: state.country.filter((e) => e.continent !== action.payload),
+        allCountry: state.backUp.filter((e) => e.continent === action.payload),
+      };
+
+    case FILTER_ACT:
+      return {
+        ...state,
+        allCountry: state.backUp.filter((e) => e.activities === action.payload),
+      };
+
+    case ORDER_ALPH:
+      return {
+        ...state,
+        allCountry: [...state.allCountry].sort((a, b) => {
+          if (action.payload === "ascendente") {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+          } else {
+            if (a.name < b.name) return 1;
+            if (a.name > b.name) return -1;
+            return 0;
+          }
+        }),
+      };
+
+    case ORDER_POBLATION:
+      return {
+        ...state,
+        allCountry: [...state.allCountry].sort((a, b) => {
+          if (action.payload === "ascendente") {
+            if (a.poblation < b.poblation) return -1;
+            if (a.poblation > b.poblation) return 1;
+            return 0;
+          } else {
+            if (a.poblation < b.poblation) return 1;
+            if (a.poblation > b.poblation) return -1;
+            return 0;
+          }
+        }),
       };
 
     default:

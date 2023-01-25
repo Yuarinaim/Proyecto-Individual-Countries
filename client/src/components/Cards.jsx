@@ -1,11 +1,11 @@
-import Card from './Card';
+/* TODO import Card from './Card';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { getAllCountry } from '../Redux/actions'
 import styled from 'styled-components'
 
 
-export default function Cards(props) {
+export default function Cards() {
    
     const dispatch = useDispatch()
     
@@ -13,14 +13,12 @@ export default function Cards(props) {
         dispatch(getAllCountry())
     }, [])
 
-    const country = useSelector(state => state?.country)
+    const allCountry = useSelector(state => state?.allCountry)
 
    return <Cartas>
-      {country?.map((e) => <Card
-      key={e.id}
-      id={e.id} 
-      name={e.name} 
-      capital={e.capital} 
+      {allCountry?.map((e) => <Card
+      key={e.id} 
+      name={e.name}
       continent={e.continent} 
       image={e.image} />)}
       </Cartas>;
@@ -29,4 +27,4 @@ export default function Cards(props) {
 const Cartas = styled.div`
     width: 300px;
     height: 400px;
-`
+` */
