@@ -57,7 +57,9 @@ const countryId = async (id) => {
       {
         model: Activities,
         attributes: ["name", "dificulty", "duration", "season"],
-        timestamps: false,
+        through: {
+          attributes: [],
+        },
       },
     ],
   });

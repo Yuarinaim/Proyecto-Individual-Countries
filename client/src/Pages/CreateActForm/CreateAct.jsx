@@ -8,6 +8,7 @@ const CreateActivities = () => {
     dificulty: "",
     duration: "",
     season: "",
+    paises: "",
   });
 
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ const CreateActivities = () => {
         <label>season: </label>
         {/* prettier-ignore */}
         <input onChange={handleChange} type="text" name='season' value={activity.season}/>
+
+        <label>Pais/es: </label>
+        {/* prettier-ignore */}
+        <input onChange={handleChange} type="text" name='paises' value={activity.paises}/>
 
         <button type="submit">Create Activity</button>
       </form>
