@@ -26,10 +26,10 @@ export default function Details() {
       <h1>Actividades de {countryDetail.name}</h1>
       {countryDetail.activities?.map((act) => (
         <div>
-          <h2>{act.name}</h2>
-          <h2>{act.dificulty}</h2>
-          <h2>{act.duration}</h2>
-          <h2>{act.season}</h2>
+          <h2>Name: {act.name}</h2>
+          <h2>Dificulty: {act.dificulty}</h2>
+          <h2>Duration: {act.duration}</h2>
+          <h2>Season: {act.season}</h2>
         </div>
       ))}
       <Link to="/home">
