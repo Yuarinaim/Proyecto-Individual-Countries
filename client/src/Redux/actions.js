@@ -4,6 +4,7 @@ export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
 export const GET_ALL_COUNTRY = "GET_ALL_COUNTRY";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
+export const GET_NAME_ACTIVITIES = "GET_NAME_ACTIVITIES";
 // CONTINENTE Y TIPO DE ACTIVIDAD
 export const FILTER_CONTINENT = "FILTER_CONTINENT";
 export const FILTER_ACT = "FILTER_ACT";
@@ -18,22 +19,22 @@ export const createActivity = (id) => {
   };
 };
 
-export const getAllCountry = () => {
-  return async function (dispatch) {
-    let response = await axios.get(`http://localhost:3001/countries`);
-    return dispatch({
-      type: GET_ALL_COUNTRY,
-      payload: response.data,
-    });
-  };
-};
-
 // prettier-ignore
 export const getNameCountry = (name) => {
   return async function (dispatch) {
     let response = await axios.get(`http://localhost:3001/countries?name=${name}`);
     return dispatch({
       type: SEARCH_COUNTRY,
+      payload: response.data,
+    });
+  };
+};
+
+export const getAllCountry = () => {
+  return async function (dispatch) {
+    let response = await axios.get(`http://localhost:3001/countries`);
+    return dispatch({
+      type: GET_ALL_COUNTRY,
       payload: response.data,
     });
   };
@@ -49,6 +50,17 @@ export const getCountryDetail = (id) => {
   };
 };
 
+export const getNameActivities = () => {
+  return async function (dispatch) {
+    let response = await axios.get(`http://localhost:3001/activities/names`);
+    return dispatch({
+      type: GET_NAME_ACTIVITIES,
+      payload: response.data,
+    });
+  };
+};
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const filterContinent = (continent) => {
   return {
     type: FILTER_CONTINENT,
@@ -56,7 +68,6 @@ export const filterContinent = (continent) => {
   };
 };
 
-////////////////////////////////////////////////////////
 export const filterAct = (act) => {
   return {
     type: FILTER_ACT,
@@ -64,6 +75,7 @@ export const filterAct = (act) => {
   };
 };
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const orderAZ = (state) => {
   return {
     type: ORDER_ALPH,
@@ -71,9 +83,9 @@ export const orderAZ = (state) => {
   };
 };
 
-export const orderPobla = (method) => {
+export const orderPobla = (state) => {
   return {
     type: ORDER_POBLATION,
-    payload: method,
+    payload: state,
   };
 };

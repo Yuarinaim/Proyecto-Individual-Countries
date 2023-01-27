@@ -7,6 +7,7 @@ import {
   FILTER_ACT,
   ORDER_ALPH,
   ORDER_POBLATION,
+  GET_NAME_ACTIVITIES,
 } from "./actions";
 
 // ESTADO
@@ -15,6 +16,7 @@ const initialState = {
   allCountry: [],
   countryDetail: [],
   sortCountry: [],
+  activitiesNames: [],
 };
 //
 
@@ -27,8 +29,13 @@ const rootReducer = (state = initialState, action) => {
         allCountry: action.payload,
       };
 
+    case GET_NAME_ACTIVITIES:
+      return {
+        ...state,
+        activitiesNames: action.payload,
+      };
+
     case SEARCH_COUNTRY:
-      console.log("payload", action.payload);
       return {
         ...state,
         backUp: action.payload,
@@ -36,6 +43,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_COUNTRY_DETAIL:
+      console.log(action.payload);
       return {
         ...state,
         countryDetail: action.payload,
@@ -46,17 +54,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         backUp: [...state.backUp, action.payload],
       };
-    ///////////////////////////////////
+    // ! =======================================================
     case FILTER_CONTINENT:
       return {
         ...state,
-        allCountry: state.backUp.filter((e) => e.continent === action.payload),
+        allCountry: state.allCountry.filter(
+          (e) => e.continent === action.payload
+        ),
       };
 
     case FILTER_ACT:
       return {
         ...state,
-        allCountry: state.backUp.filter((e) => e.activities === action.payload),
+        allCountry: state.allCountry.filter((e) =>
+          e.activities.includes(action.payload)
+        ),
       };
 
     case ORDER_ALPH:
@@ -80,13 +92,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCountry: [...state.allCountry].sort((a, b) => {
           if (action.payload === "ascendente") {
-            if (a.poblation < b.poblation) return -1;
-            if (a.poblation > b.poblation) return 1;
-            return 0;
+            return a.poblation - b.poblation;
           } else {
-            if (a.poblation < b.poblation) return 1;
-            if (a.poblation > b.poblation) return -1;
-            return 0;
+            return b.poblation - a.poblation;
           }
         }),
       };

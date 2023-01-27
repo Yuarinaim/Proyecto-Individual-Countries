@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Card";
 import { getAllCountry } from "../../Redux/actions";
 import Sort from "../Sort/Sort";
+import Filtros from "../Filtros/FilterAct";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Pagination = () => {
   }, []);
 
   const allCountry = useSelector((state) => state.allCountry);
-  const count = 9;
+  const count = 10;
   const [page, setPage] = useState(1);
 
   const countryPage =
@@ -42,6 +43,7 @@ const Pagination = () => {
         <span>
           Página {page} de {countryPage}
         </span>
+        <hr />
         {/* prettier-ignore */}
         <button disabled={page === 1} onClick={handleClick} value="prev">
           {`<`}
@@ -50,6 +52,9 @@ const Pagination = () => {
         <button disabled={page === countryPage} onClick={handleClick} value="next">
           {`>`}
         </button>
+        <hr />
+        <Filtros />
+        <hr />
         <Sort />
       </div>
       <div>
@@ -57,6 +62,7 @@ const Pagination = () => {
           return (
             <Card
               key={e.id}
+              id={e.id}
               image={e.image}
               name={e.name}
               continent={e.continent}
@@ -69,39 +75,3 @@ const Pagination = () => {
 };
 
 export default Pagination;
-/* import { useState } from 'react';
-import { useSelector } from 'react-redux';
-
-const Pagination = (itemsPerPage = 9) => {
-  
-  const [currentPage, setCurrentPage] = useState(1);
-    
-  const allCountry = useSelector(state => state.allCountry)
-  
-  
-  const totalPages = Math.ceil(allCountry / itemsPerPage);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  return (
-    <div>
-      <button
-        disabled={currentPage === 1}
-        onClick={() => handlePageChange(currentPage - 1)}
-      >
-        Anterior
-      </button>
-      <span>Página {currentPage} de {totalPages}</span>
-      <button
-        disabled={currentPage === totalPages}
-        onClick={() => handlePageChange(currentPage + 1)}
-      >
-        Siguiente
-      </button>
-    </div>
-  );
-};
-
-export default Pagination; */

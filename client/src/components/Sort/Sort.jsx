@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { orderAZ } from "../../Redux/actions";
+import { orderAZ, orderPobla } from "../../Redux/actions";
 
 const Sort = () => {
-  const [name, setName] = useState("");
+  const [state, setState] = useState("");
   const dispatch = useDispatch();
 
   const handleSortAZ = (e) => {
     e.preventDefault();
-    setName(e.target.value);
-    dispatch(orderAZ(name));
+    setState(e.target.value);
+    dispatch(orderAZ(state));
   };
+
+  const handleSortPoblation = (e) => {
+    e.preventDefault();
+    setState(e.target.value);
+    dispatch(orderPobla(state));
+  };
+
   return (
     <div>
       <div>
@@ -21,7 +28,14 @@ const Sort = () => {
           Orden Z-A
         </button>
       </div>
-      <div></div>
+      <div>
+        <button value={"ascendente"} onClick={handleSortPoblation}>
+          Orden Poblation men - may
+        </button>
+        <button value={"descendente"} onClick={handleSortPoblation}>
+          Orden Poblation may - men
+        </button>
+      </div>
     </div>
   );
 };

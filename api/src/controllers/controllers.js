@@ -28,7 +28,7 @@ const getAllCountriesAPI = async () => {
 
 const getCountries = async () => {
   const listCountries = await Country.findAll({
-    attributes: ["id", "name", "continent", "image"],
+    attributes: ["id", "name", "continent", "image", "poblation"],
     include: [
       {
         model: Activities,
@@ -53,12 +53,29 @@ const findCountriesMatches = async (name) => {
 const countryId = async (id) => {
   const findId = await Country.findOne({
     where: { id: id },
+    include: [
+      {
+        model: Activities,
+        attributes: ["name", "dificulty", "duration", "season"],
+        timestamps: false,
+      },
+    ],
   });
   return findId;
 };
 
-const createActivity = async ({ name, dificulty, duration, season }) => {
-  return Activities.create({ name, dificulty, duration, season });
+// prettier-ignore
+const createActivity = async ({ idCountry, name, dificulty, duration, season,}) => {
+  const createAct = await Activities.create({ name, dificulty, duration, season })
+  createAct.setCountries(idCountry)
+  return createAct;
+};
+
+const getNamesActivities = async () => {
+  const nameActivities = await Activities.findAll({
+    attributes: ["name"],
+  });
+  return nameActivities;
 };
 
 module.exports = {
@@ -67,8 +84,5 @@ module.exports = {
   getCountries,
   countryId,
   createActivity,
+  getNamesActivities,
 };
-/* 
-GET https://restcountries.com/v3/all
-GET https://restcountries.com/v3/name/{name}
-GET https://restcountries.com/v3/alpha/{code} */

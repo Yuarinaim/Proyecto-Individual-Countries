@@ -9,21 +9,20 @@ export default function SearchBar() {
 
   const handleChange = (e) => {
     setState(e.target.value);
-    console.log(state);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitName = (e) => {
     e.preventDefault();
     dispatch(getNameCountry(state));
   };
 
-  const handleClick = (e) => {
+  const handleMostrarPaises = (e) => {
     e.preventDefault();
     dispatch(getAllCountry());
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitName}>
       <input
         type="search"
         onChange={handleChange}
@@ -31,7 +30,7 @@ export default function SearchBar() {
         placeholder="Buscar pais..."
       />
       <button>Buscar</button>
-      <button onClick={handleClick}>Mostrar todos</button>
+      <button onClick={handleMostrarPaises}>Mostrar todos</button>
     </form>
   );
 }

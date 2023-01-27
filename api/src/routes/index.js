@@ -6,6 +6,7 @@ const {
   getCountries,
   countryId,
   createActivity,
+  getNamesActivities,
 } = require("../controllers/controllers");
 
 // Importar todos los routers;
@@ -27,7 +28,7 @@ router.get("/countries", async (req, res) => {
   }
 });
 
-router.get("/countries", async (req, res) => {
+/* router.get("/countries", async (req, res) => {
   const { name } = req.query;
   try {
     const allMatches = findCountriesMatches(name);
@@ -35,17 +36,26 @@ router.get("/countries", async (req, res) => {
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
-});
+}); */
 
 router.post("/activities", async (req, res) => {
-  const { name, dificulty, duration, season } = req.body;
+  const { name, dificulty, duration, season, idCountry } = req.body;
   try {
     // prettier-ignore
-    const newActivity = await createActivity({name, dificulty, duration, season});
+    const newActivity = await createActivity({name, dificulty, duration, season, idCountry});
     res.status(200).json({
       state: "Activity created",
       activity: newActivity,
     });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.get("/activities/names", async (req, res) => {
+  try {
+    const nameActivities = await getNamesActivities();
+    res.status(200).json(nameActivities);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -61,8 +71,3 @@ router.get("/countries/:id", async (req, res) => {
 });
 
 module.exports = router;
-
-/* 
-GET https://restcountries.com/v3/all
-GET https://restcountries.com/v3/name/{name}
-GET https://restcountries.com/v3/alpha/{code} */
