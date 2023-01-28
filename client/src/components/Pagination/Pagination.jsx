@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Card";
 import { getAllCountry } from "../../Redux/actions";
 import Sort from "../Sort/Sort";
-import Filtros from "../Filtros/FilterAct";
+import FilterCont from "../Filtros/FilterCont";
+import FilterAct from "../Filtros/FilterAct";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,8 @@ const Pagination = () => {
           {`>`}
         </button>
         <hr />
-        <Filtros />
+        <FilterCont />
+        <FilterAct />
         <hr />
         <Sort />
       </div>

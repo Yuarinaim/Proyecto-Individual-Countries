@@ -67,7 +67,7 @@ const countryId = async (id) => {
 };
 
 // prettier-ignore
-const createActivity = async ({ idCountry, name, dificulty, duration, season,}) => {
+const createActivity = async ( {idCountry, name, dificulty, duration, season,}) => {
   const createAct = await Activities.create({ name, dificulty, duration, season })
   createAct.setCountries(idCountry)
   return createAct;

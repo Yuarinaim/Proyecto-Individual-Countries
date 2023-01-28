@@ -60,7 +60,7 @@ export const getNameActivities = () => {
   };
 };
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!SEPARADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const filterContinent = (continent) => {
   return {
     type: FILTER_CONTINENT,
@@ -75,7 +75,7 @@ export const filterAct = (act) => {
   };
 };
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!SEPARADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const orderAZ = (state) => {
   return {
     type: ORDER_ALPH,

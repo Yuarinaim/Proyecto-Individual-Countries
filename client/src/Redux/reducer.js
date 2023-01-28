@@ -54,23 +54,37 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         backUp: [...state.backUp, action.payload],
       };
-    // ! =======================================================
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!SEPARADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     case FILTER_CONTINENT:
+      let filtradoCont = null;
+      if (action.payload === "Continents") {
+        filtradoCont = state.backUp;
+      } else {
+        // prettier-ignore
+        filtradoCont = state.backUp.filter((e) => e.continent === action.payload);
+      }
       return {
         ...state,
-        allCountry: state.allCountry.filter(
-          (e) => e.continent === action.payload
-        ),
+        allCountry: filtradoCont,
       };
 
     case FILTER_ACT:
+      let filtradoAct = null;
+      if (action.payload === "Actividades") {
+        filtradoAct = state.backUp;
+      } else {
+        // prettier-ignore
+        filtradoAct = state.allCountry.filter((e) => {
+          return e.activities.some((el)=> el.name.includes(action.payload))
+        })
+      }
       return {
         ...state,
-        allCountry: state.allCountry.filter((e) =>
-          e.activities.includes(action.payload)
-        ),
+        allCountry: filtradoAct,
       };
 
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!SEPARADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     case ORDER_ALPH:
       return {
         ...state,
