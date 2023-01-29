@@ -1,6 +1,5 @@
 import axios from "axios";
 
-export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
 export const GET_ALL_COUNTRY = "GET_ALL_COUNTRY";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
@@ -11,13 +10,6 @@ export const FILTER_ACT = "FILTER_ACT";
 // ASC Y DESC ALFABETICO, CANT POBLACION
 export const ORDER_ALPH = "ORDER_ALPH";
 export const ORDER_POBLATION = "ORDER_POBLATION";
-
-export const createActivity = (id) => {
-  return {
-    type: CREATE_ACTIVITY,
-    payload: id,
-  };
-};
 
 // prettier-ignore
 export const getNameCountry = (name) => {

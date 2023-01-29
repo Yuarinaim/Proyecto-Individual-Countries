@@ -1,5 +1,4 @@
 import {
-  CREATE_ACTIVITY,
   SEARCH_COUNTRY,
   GET_ALL_COUNTRY,
   GET_COUNTRY_DETAIL,
@@ -49,11 +48,11 @@ const rootReducer = (state = initialState, action) => {
         countryDetail: action.payload,
       };
 
-    case CREATE_ACTIVITY:
+    /* case CREATE_ACTIVITY:
       return {
         ...state,
         backUp: [...state.backUp, action.payload],
-      };
+      }; */
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!SEPARADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     case FILTER_CONTINENT:

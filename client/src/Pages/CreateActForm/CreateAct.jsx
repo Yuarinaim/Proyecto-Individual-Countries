@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { createActivity } from "../../Redux/actions";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CreateActivities = () => {
   const [activity, setActivity] = useState({
@@ -8,22 +9,42 @@ const CreateActivities = () => {
     dificulty: "",
     duration: "",
     season: "",
-    paises: "",
+    idCountry: [],
   });
 
-  const dispatch = useDispatch();
+  const allCountry = useSelector((state) => state.allCountry);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createActivity());
+    // prettier-ignore
+    axios.post("http://localhost:3001/activities", activity)
+      .then(() => { alert("Actividad creada"); })
+      .catch(() => { alert("Hubo un error en los datos administrados"); });
   };
 
   const handleChange = (e) => {
+    const property = e.target.name;
+    const value = e.target.value;
+    if (property === "idCountry") {
+      setActivity({ ...activity, [property]: [...activity.idCountry, value] });
+    } else {
+      setActivity({ ...activity, [property]: value });
+    }
+    console.log(activity);
+  };
+
+  /* const handleChange = (e) => {
     setActivity({
       ...activity,
       [e.target.name]: e.target.value,
     });
-  };
+  }; */
+
+  /* const setCountries = (e) => {
+    const objAct = { [e.target.value]: true };
+    const convertArr = Object.keys(objAct);
+    setActivity(...activity, country: convertArr);
+  }; */
 
   return (
     <div>
@@ -44,12 +65,24 @@ const CreateActivities = () => {
         {/* prettier-ignore */}
         <input onChange={handleChange} type="text" name='season' value={activity.season}/>
 
-        <label>Pais/es: </label>
         {/* prettier-ignore */}
-        <input onChange={handleChange} type="text" name='paises' value={activity.paises}/>
+        <select onChange={handleChange} name="idCountry" value={activity.idCountry}>
+          <option>Paises</option>
+          {allCountry?.map((e, i) => (
+            <option key={i} value={e.id}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+        {/* <label>Pais/es: </label>
+        {/* prettier-ignore }
+        <input onChange={handleChange} type="text" name='paises' value={activity.paises}/> */}
 
         <button type="submit">Create Activity</button>
       </form>
+      <Link to="/home">
+        <button>Volver</button>
+      </Link>
     </div>
   );
 };

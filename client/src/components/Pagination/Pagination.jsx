@@ -1,19 +1,11 @@
-import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Card from "../Card/Card";
-import { getAllCountry } from "../../Redux/actions";
 import Sort from "../Sort/Sort";
 import FilterCont from "../Filtros/FilterCont";
 import FilterAct from "../Filtros/FilterAct";
 
 const Pagination = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCountry());
-  }, []);
-
   const allCountry = useSelector((state) => state.allCountry);
   const count = 10;
   const [page, setPage] = useState(1);
