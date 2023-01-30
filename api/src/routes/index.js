@@ -28,16 +28,6 @@ router.get("/countries", async (req, res) => {
   }
 });
 
-/* router.get("/countries", async (req, res) => {
-  const { name } = req.query;
-  try {
-    const allMatches = findCountriesMatches(name);
-    res.status(200).json(allMatches);
-  } catch (error) {
-    res.status(404).json({ error: error.message });
-  }
-}); */
-
 router.post("/activities", async (req, res) => {
   const { name, dificulty, duration, season, idCountry } = req.body;
   try {

@@ -1,24 +1,25 @@
-import React from "react";
 import video from "../../fondos/videoBG.mp4";
-import s from "../button.module.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import s from "./Button.module.css";
+import o from "./Otros.module.css";
 
 export default function principalPage() {
   return (
-    <Contenedor>
+    <div>
       <VideoBG autoPlay loop muted>
         <source src={video} type="video/mp4" />
       </VideoBG>
+      <h1 className={`${o.textoPP}`}>Bienvenido al PI Countries</h1>
       <Link to="/home">
-        <button className={s.fancy}>
-          <span className={`${s.topKey}`}></span>
-          <span className={`${s.text}`}>Empezar</span>
-          <span className={`${s.bottomKey1}`}></span>
-          <span className={`${s.bottomKey2}`}></span>
+        <button className={`${s.button}`}>
+          <span className={`${s.button_lg}`}>
+            <span className={`${s.button_sl}`}></span>
+            <span className={`${s.button_text}`}>Start</span>
+          </span>
         </button>
       </Link>
-    </Contenedor>
+    </div>
   );
 }
 
@@ -32,7 +33,4 @@ const VideoBG = styled.video`
   z-index: -1;
 `;
 
-const Contenedor = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+/* const Contenedor = styled.div``; */
