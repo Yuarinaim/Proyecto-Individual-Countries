@@ -1,0 +1,40 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 5rem;
+    background-color: rgb(21, 125, 163);
+    background-image: url('../../fondos/continents640.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
+
+.link {
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    width: 300px;
+    height: 40px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: 2.5px solid #E0E1E4;
+    box-shadow: 0px 0px 20px -20px;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.2s ease-in-out 0ms;
+    user-select: none;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .link:hover {
+    background-color: #11a9efef;
+    box-shadow: 0px 0px 20px -18px;
+  }
+  
+  .link:active {
+    transform: scale(0.95);
+  }

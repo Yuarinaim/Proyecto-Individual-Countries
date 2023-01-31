@@ -16,7 +16,7 @@ const getAllCountriesAPI = async () => {
     createCountries({
       id: c.cca3,
       name: c.name?.common,
-      image: c.flags[0],
+      image: c.flags[1],
       continent: c.continents[0],
       capital: c.capital?.[0],
       subregion: c.subregion,

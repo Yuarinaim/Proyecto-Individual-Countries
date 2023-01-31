@@ -1,0 +1,28 @@
+.sort {
+    border: 2px solid blue;
+    margin-top: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+}
+
+.filter_cont {
+    border: 2px solid blue;
+    margin-top: 10px;
+}
+
+.filter_act {
+    border: 2px solid blue;
+    margin-top: 150px;
+}
+
+.contenedor {
+    width: 250px;
+    height: 550px;
+    border: 2px solid black;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -1,0 +1,57 @@
+.contenedor_pagination{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 30px;
+    
+}
+
+.text {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    -webkit-text-stroke: 0.5px black;
+    text-shadow: rgb(0, 0, 0) 0.1em 0.1em 0.2em;
+}
+
+.centrado_texto {
+    gap: 1px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.button {
+    width: 20px;
+    height: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2.5px solid #E0E1E4;
+    box-shadow: 0px 0px 20px -20px;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.2s ease-in-out 0ms;
+    user-select: none;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 20px;
+  }
+  
+  .button:hover {
+    background-color: #11a9efef;
+    box-shadow: 0px 0px 20px -18px;
+  }
+  
+  .button:active {
+    transform: scale(0.95);
+  }

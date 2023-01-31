@@ -1,57 +1,66 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "../Card/Card";
-import Sort from "../Sort/Sort";
-import FilterCont from "../Filtros/FilterCont";
-import FilterAct from "../Filtros/FilterAct";
+import s from "./Pagination.module.css";
 
 const Pagination = () => {
   const allCountry = useSelector((state) => state.allCountry);
   const count = 10;
   const [page, setPage] = useState(1);
 
-  const countryPage =
-    Array.isArray(allCountry) && Math.ceil(allCountry.length / count); //  Se define la cantidad de paginas con los country que tendra
-  const paginate = allCountry?.slice((page - 1) * count, page * count); // Define el corte por el cual va a arrancar la siguiente paginacion
+  const countryPage = Math.ceil(allCountry.length / count);
+  const paginate = allCountry?.slice((page - 1) * count, page * count);
 
   const handleClick = (e) => {
-    if (e.target.value === "prev") {
-      setPage(page - 1);
+    if (e.target.value === "next") {
+      if (page === countryPage) {
+        setPage(1);
+      } else {
+        setPage(page + 1);
+      }
+    } else if (e.target.value === "prev") {
+      if (page === 1) {
+        setPage(countryPage);
+      } else {
+        setPage(page - 1);
+      }
     } else {
-      // TODO: necesito agregar un condicional para page con numeros
-      setPage(page + 1);
+      setPage(parseInt(e.target.value));
     }
   };
 
-  /**
-   * TODO: ESTO ES POR SI QUIERO MOSTRAR CON NUMEROS
-   * const pageNumbers = []; 
-  for (let i = 1; i < countryPage; i++) {
+  /* const setNumberPage = (e) => {
+    setPage(e.target.value);
+  }; */
+
+  const pageNumbers = [];
+  for (let i = 1; i < countryPage + 1; i++) {
     pageNumbers.push(i);
-  } */
+  }
 
   return (
-    <div>
-      <div>
-        <span>
-          Página {page} de {countryPage}
-        </span>
-        <hr />
+    <>
+      <div className={`${s.contenedor_pagination}`}>
+        <div>
+          <span className={`${s.text}`}>
+            Página {page} de {countryPage}
+          </span>
+        </div>
         {/* prettier-ignore */}
-        <button disabled={page === 1} onClick={handleClick} value="prev">
-          {`<`}
-        </button>
-        {/* prettier-ignore */}
-        <button disabled={page === countryPage} onClick={handleClick} value="next">
-          {`>`}
-        </button>
-        <hr />
-        <FilterCont />
-        <FilterAct />
-        <hr />
-        <Sort />
+        <div className={`${s.centrado_texto}`}>
+          <button className={`${s.button}`} onClick={handleClick} value="prev">
+            {`<`}
+          </button>
+          {pageNumbers.map((b) => (
+            <button className={`${s.button}`} onClick={handleClick}value={b} key={b}>{b}</button> //!!!!!!!!!!!!!!
+          ))}
+          {/* prettier-ignore */}
+          <button className={`${s.button}`} onClick={handleClick} value="next">
+            {`>`}
+          </button>
+        </div>
       </div>
-      <div>
+      <div className={`${s.cards_container}`}>
         {paginate?.map((e) => {
           return (
             <Card
@@ -64,7 +73,7 @@ const Pagination = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

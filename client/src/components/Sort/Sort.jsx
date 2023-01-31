@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { orderAZ, orderPobla } from "../../Redux/actions";
+import s from "./Sort.module.css";
 
 const Sort = () => {
   const [state, setState] = useState("");
@@ -19,24 +20,40 @@ const Sort = () => {
   };
 
   return (
-    <div>
-      <div>
-        <button value={"ascendente"} onClick={handleSortAZ}>
+    <>
+      <div className={`${s.orden_Alph}`}>
+        <button
+          className={`${s.button}`}
+          value={"ascendente"}
+          onClick={handleSortAZ}
+        >
           Orden A-Z
         </button>
-        <button value={"descendente"} onClick={handleSortAZ}>
+        <button
+          className={`${s.button}`}
+          value={"descendente"}
+          onClick={handleSortAZ}
+        >
           Orden Z-A
         </button>
       </div>
-      <div>
-        <button value={"ascendente"} onClick={handleSortPoblation}>
-          Orden Poblation men - may
+      <div className={`${s.orden_Alph}`}>
+        <button
+          className={`${s.button}`}
+          value={"ascendente"}
+          onClick={handleSortPoblation}
+        >
+          Poblation men - may
         </button>
-        <button value={"descendente"} onClick={handleSortPoblation}>
-          Orden Poblation may - men
+        <button
+          className={`${s.button}`}
+          value={"descendente"}
+          onClick={handleSortPoblation}
+        >
+          Poblation may - men
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

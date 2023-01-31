@@ -1,4 +1,19 @@
-.contenedor{
+.contenedor {
+    min-height: 100vh;
+    background-image: url('../../fondos/FondoHome.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
     display: flex;
-    justify-content: center;
+}
+
+.sideBar {
+    width: 250px;
+    margin-top: 100px;
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

@@ -4,3 +4,27 @@
     margin-left: 650px;
     margin-top: 300px;
 }
+
+.difuminado_video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(94, 94, 94, 0.856);
+    z-index: -1;
+    opacity: .6;
+    backdrop-filter:  blur(5px);
+    mix-blend-mode: overlay;
+}
+
+.video { 
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -2;
+}
+
