@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterAct, getNameActivities } from "../../Redux/actions";
+import s from "./FilterAct.module.css";
 
 const FilterAct = () => {
   const activitiesNames = useSelector((state) => state.activitiesNames);
@@ -15,7 +16,7 @@ const FilterAct = () => {
   };
 
   return (
-    <select onChange={onChangeAct}>
+    <select className={`${s.select}`} onChange={onChangeAct}>
       <option value="Actividades">Actividades</option>
       {activitiesNames?.map((e) => (
         <option key={e.name} value={e.name}>

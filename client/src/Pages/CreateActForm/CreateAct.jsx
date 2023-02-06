@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import s from "./CreateAct.module.css";
+import { useEffect } from "react";
+import { getAllCountry } from "../../Redux/actions";
 
 const CreateActivities = () => {
   const [activity, setActivity] = useState({
@@ -10,12 +13,23 @@ const CreateActivities = () => {
     duration: "",
     season: "",
     idCountry: [],
+    nameCountry: "",
   });
+
+  const dificulty = ["1", "2", "3", "4", "5"];
+  const season = ["Winter", "Autumn", "Summer", "Spring"];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCountry());
+  }, []);
 
   const allCountry = useSelector((state) => state.allCountry);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(activity);
     // prettier-ignore
     axios.post("http://localhost:3001/activities", activity)
       .then(() => { alert("Actividad creada"); })
@@ -33,55 +47,61 @@ const CreateActivities = () => {
     console.log(activity);
   };
 
-  /* const handleChange = (e) => {
-    setActivity({
-      ...activity,
-      [e.target.name]: e.target.value,
-    });
-  }; */
-
-  /* const setCountries = (e) => {
-    const objAct = { [e.target.value]: true };
-    const convertArr = Object.keys(objAct);
-    setActivity(...activity, country: convertArr);
-  }; */
-
   return (
-    <div>
-      <form onSubmit={handleSubmit} action="">
-        <label>Name: </label>
-        {/* prettier-ignore */}
-        <input onChange={handleChange} type="text" name='name' value={activity.name}/>
+    <div className={`${s.contenedor}`}>
+      <form className={`${s.form}`} onSubmit={handleSubmit} action="">
+        <h1 className={`${s.h1}`}>Create activity</h1>
+        <div className={`${s.name_duration}`}>
+          <div>
+            <label className={`${s.label}`}>Name:</label>
+            {/* prettier-ignore */}
+            <input className={`${s.input}`} onChange={handleChange} type="text" autoComplete="off" name='name' value={activity.name} />
+          </div>
 
-        <label>duration: </label>
-        {/* prettier-ignore */}
-        <input onChange={handleChange} type="text" name='duration' value={activity.duration}/>
+          <div>
+            <label className={`${s.label}`}>Duration:</label>
+            {/* prettier-ignore */}
+            <input className={`${s.input}`} onChange={handleChange} type="text" autoComplete="off" name='duration' value={activity.duration} />
+          </div>
+        </div>
 
-        <label>dificulty: </label>
-        {/* prettier-ignore */}
-        <input onChange={handleChange} type="text" name='dificulty' value={activity.dificulty}/>
+        <div className={`${s.dificulty_season}`}>
+          {/* prettier-ignore */}
+          <select className={`${s.select}`} onChange={handleChange} name='dificulty' value={activity.dificulty}>
+            <option>Dificulty:</option>
+            {dificulty.map((n) => (
+              <option key={n}>{n}</option>
+            ))}
+          </select>
+          {/* prettier-ignore */}
+          <select className={`${s.select}`} onChange={handleChange} name='season' value={activity.season}>
+            <option>Season:</option>
+            {season.map((n) => (
+              <option key={n}>{n}</option>
+            ))}
+          </select>
+        </div>
 
-        <label>season: </label>
         {/* prettier-ignore */}
-        <input onChange={handleChange} type="text" name='season' value={activity.season}/>
-
-        {/* prettier-ignore */}
-        <select onChange={handleChange} name="idCountry" value={activity.idCountry}>
-          <option>Paises</option>
+        <select className={`${s.paises}`} onChange={handleChange} name="idCountry" value={activity.idCountry} >
+          <option hidden>Paises</option>
           {allCountry?.map((e, i) => (
             <option key={i} value={e.id}>
               {e.name}
             </option>
           ))}
         </select>
-        {/* <label>Pais/es: </label>
-        {/* prettier-ignore }
-        <input onChange={handleChange} type="text" name='paises' value={activity.paises}/> */}
 
-        <button type="submit">Create Activity</button>
+        <div>
+          <p className={`${s.label}`}>{activity.idCountry + ","}</p>
+        </div>
+
+        <button className={`${s.button}`} type="submit">
+          Create Activity
+        </button>
       </form>
       <Link to="/home">
-        <button>Volver</button>
+        <button className={`${s.button}`}>Volver</button>
       </Link>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { filterContinent } from "../../Redux/actions";
+import s from "./FilterCont.module.css";
 
 const FilterCont = () => {
   const continents = [
@@ -18,7 +19,7 @@ const FilterCont = () => {
   };
 
   return (
-    <select onChange={onChangeCont}>
+    <select className={`${s.select}`} onChange={onChangeCont}>
       <option value="Continents">Continents</option>
       {continents?.map((e) => (
         <option key={e} value={e}>

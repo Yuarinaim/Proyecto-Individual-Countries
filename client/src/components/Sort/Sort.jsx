@@ -8,15 +8,13 @@ const Sort = () => {
   const dispatch = useDispatch();
 
   const handleSortAZ = (e) => {
-    e.preventDefault();
     setState(e.target.value);
-    dispatch(orderAZ(state));
+    dispatch(orderAZ(e.target.value));
   };
 
   const handleSortPoblation = (e) => {
-    e.preventDefault();
     setState(e.target.value);
-    dispatch(orderPobla(state));
+    dispatch(orderPobla(e.target.value));
   };
 
   return (
