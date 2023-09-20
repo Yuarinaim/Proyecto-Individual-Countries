@@ -5,9 +5,17 @@ import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
 import CreateActivities from "./Pages/CreateActForm/CreateAct";
 import NavBar from "./components/NavBar/NavBar";
+import { useEffect } from "react";
 
 function App() {
   const { pathname } = useLocation();
+
+  useEffect(
+    fetch("https://apis.datos.gob.ar/georef/api/provincias")
+      .then((res) => res.json())
+      .then((res) => console.log(res)),
+    []
+  );
   return (
     <div className={`${pathname !== "/" && "Home"}`}>
       {pathname !== "/" && <NavBar />}
